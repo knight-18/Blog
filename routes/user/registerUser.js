@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken")
 const { validationResult } = require('express-validator');
 const { accountCreated } = require('../../emails/Account');
 const CatchAsync = require("../../utils/catchAsync");
-
+const event = require("../../utils/eventTable")
 
 const registerUser =  CatchAsync( async(req, res)=>{
         const errors = validationResult(req)
@@ -23,10 +23,9 @@ const registerUser =  CatchAsync( async(req, res)=>{
             email,
             password
         })
-
         const token = await newUser.generateAuthToken()
         accountCreated(newUser.username, newUser.email)
-
+        await event("New user registered", newUser)
         res.status(201).send({
             status: "Success",
             message:"Account is created successfully.",

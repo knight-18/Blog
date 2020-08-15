@@ -11,6 +11,9 @@ const PostSchema = mongoose.Schema({
     postBody:{
       type: String
     },
+    shareLink:{
+      type: String
+    },
     image:{
         type: Buffer
     },

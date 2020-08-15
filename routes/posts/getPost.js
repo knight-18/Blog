@@ -1,9 +1,14 @@
 const AppError = require("../../utils/AppError")
 const CatchAsync = require("../../utils/CatchAsync")
 const Post = require("../../models/Post/Post")
+const User = require("../../models/user")
 
 //Function to get all posts of a user
 const getAllPosts = CatchAsync( async( req, res, next)=>{
+    const postAuthor = await User.findById(req.params.id)
+    if(!postAuthor){
+        return next(new AppError("No such author found", 400))
+    }
     const posts = await Post.find({author: req.params.id}).sort({
         createdAt: -1
     })

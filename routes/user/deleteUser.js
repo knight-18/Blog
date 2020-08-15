@@ -4,6 +4,7 @@ const bcrypt = require("bcryptjs")
 const { accountDeleted } = require("../../emails/Account")
 const User = require("../../models/user")
 const { validationResult } = require("express-validator")
+const event = require("../../utils/eventTable")
 
 const deleteUser = CatchAsync( async(req, res, next)=>{
     const errors = validationResult(req);
@@ -23,6 +24,7 @@ const deleteUser = CatchAsync( async(req, res, next)=>{
 
     if(!isMatch) return next(new AppError("Incorrect Password", 400))
     const removed = await user.remove()
+    await event("User deleted", removed)
     accountDeleted(removed.username, removed.email)
     return res.status(200).send({status:"Success",message:"Account was deleted successfully."})
 })

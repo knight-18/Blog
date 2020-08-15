@@ -2,6 +2,7 @@ const Post = require("../../models/Post/Post")
 const Comment = require("../../models/Post/Comment")
 const CatchAsync = require("../../utils/CatchAsync")
 const AppError = require("../../utils/AppError")
+const event = require("../../utils/eventTable")
 
 
 const addComment = CatchAsync( async( req, res, next) =>{
@@ -15,6 +16,7 @@ const addComment = CatchAsync( async( req, res, next) =>{
     comment.post = post._id;
     await comment.save();
     await post.save()
+    await event(`${req.user.username} added a new comment.`, req.user)
     res.send({
         status: "Success",
         message:"Comment is added successfully.",
@@ -23,7 +25,7 @@ const addComment = CatchAsync( async( req, res, next) =>{
 })
 
 const editComment = CatchAsync( async(req, res, next)=>{
-    await Comment.findOneAndUpdate(
+    const editedComment = await Comment.findOneAndUpdate(
         {
             _id: req.params.comment_id,
             user: req.user._id
@@ -32,6 +34,10 @@ const editComment = CatchAsync( async(req, res, next)=>{
             content: req.body.content
         }
     )
+    if(!editedComment){
+        next(new AppError("No such comment found", 400))
+    }
+    await event(`${req.user.username} edited his comment.`, req.user)
     res.send({
         status: "Success",
         message:"Comment updated"
@@ -55,6 +61,7 @@ const deleteComment = CatchAsync( async(req, res, next)=>{
         }
     })
     await commentExists.remove()
+    await event(`${req.user.username} deleted his comment.`, req.user)
     res.send({ status: 'Success', message: 'Comment is deleted' });
 })
 

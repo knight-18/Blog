@@ -2,14 +2,13 @@ const express = require("express")
 const router = express.Router();
 const userRoutes = require("./user/user")
 const postRoutes = require("./posts/post")
-
-router.get("/test",(req, res)=>{
-  res.status(200).send("Hello there!!!")
-})
+const auditTableRoutes = require("./auditTable");
+const authMiddleware = require("../middleware/auth");
 
 
 router.use("/", userRoutes)
 router.use("/", postRoutes)
+router.get("/api/audit", authMiddleware, auditTableRoutes)
 
 // error handling
 router.use((eq, res, next) => {

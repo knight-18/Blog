@@ -10,7 +10,7 @@ const {forgotPassword, resetPassword} = require("./resetPassword")
 const getProfile = require("./getProfile")
 const deleteUser = require("./deleteUser")
 
-//Register Users
+//Route to create users
 router.post(
     '/api/users/register',
     [
@@ -23,7 +23,8 @@ router.post(
     ],
     registerUser
   );
-//Login User
+
+//Route to Login User
 router.post(
 '/api/users/login',
 [
@@ -36,21 +37,20 @@ loginUser
 //Get User's own profile
 router.get("/api/users/me", authMiddleware, getProfile)
 
-// Logout User
+//Route to Logout User
 router.post("/api/users/logout", authMiddleware, logoutUser)
 
 //logout all sessions
 router.post("/api/users/logoutall", authMiddleware, logoutAll)
 
-//Forgot Password
-
+//Route for forgot password
 router.post(
     '/api/users/forgotPassword',
     [check('username').not().isEmpty()],
     forgotPassword
   );
 
-//Reset Password
+//Route to Reset Password
 router.put(
     '/api/users/resetPassword/:token',
     [
@@ -65,8 +65,7 @@ router.put(
     resetPassword
   );
 
-  //Delete User
-
+//Route to delete user
 router.delete(
   '/api/users/delete',
   authMiddleware,
