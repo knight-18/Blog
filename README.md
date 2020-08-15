@@ -37,7 +37,8 @@ JWT_SECRET=blogo
 NODEMAILER_EMAIL=xyz@gmail.com
 NODEMAILER_PASSWORD=xyz
 ```
-Nodemailer is used for email service.(Turn on access to less secure apps from security in your email and turn off 2-Step Verification.)
+Nodemailer is used for email service.
+(Make sure to turn on **access to less secure apps** from security in email used in NODEMAILER_EMAIL and turn off **2-Step Verification** otherwise it may result in an error from nodemailer.)
 ## Installation
 Install all npm dependencies
 ```
