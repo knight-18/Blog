@@ -20,7 +20,7 @@
   - Logs all events
   - csv response
 ## API Documentation
-- Extensive and Testing Documentation with Postman : [Postman Documentation](https://documenter.getpostman.com/view/12366457/T1LPESe8?version=latest)
+- Extensive and Testing Documentation with Postman : [API Documentation](https://documenter.getpostman.com/view/12366457/T1LPESe8?version=latest)
 ## Database Models
 - User
 - Post
