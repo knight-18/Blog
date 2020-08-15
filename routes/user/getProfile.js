@@ -1,4 +1,4 @@
-const CatchAsync = require("../../utils/catchAsync");
+const CatchAsync = require("../../utils/CatchAsync");
 const User = require("../../models/user");
 
 const getProfile = CatchAsync( async (req, res)=>{

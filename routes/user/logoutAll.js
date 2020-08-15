@@ -1,4 +1,4 @@
-const CatchAsync = require("../../utils/catchAsync");
+const CatchAsync = require("../../utils/CatchAsync");
 
 const logoutAll = CatchAsync(async(req, res, next)=>{
         req.user.tokens = [];

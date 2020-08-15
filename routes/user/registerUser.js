@@ -2,7 +2,7 @@ const User = require("../../models/user")
 const jwt = require("jsonwebtoken")
 const { validationResult } = require('express-validator');
 const { accountCreated } = require('../../emails/Account');
-const CatchAsync = require("../../utils/catchAsync");
+const CatchAsync = require("../../utils/CatchAsync");
 const event = require("../../utils/eventTable")
 
 const registerUser =  CatchAsync( async(req, res)=>{

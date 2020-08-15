@@ -1,6 +1,6 @@
 const User = require("../../models/user")
 const express = require("express")
-const CatchAsync = require("../../utils/catchAsync")
+const CatchAsync = require("../../utils/CatchAsync")
 const router = express.Router()
 
 const logoutUser = CatchAsync( async (req, res,next) => {
