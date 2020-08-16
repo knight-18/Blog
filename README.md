@@ -24,7 +24,7 @@
 ## Database Models
 - User
 - Post
-  - Comment
+- Comment
 - Table (For Audit Table)
 ## Requirements
 - NODEJS
